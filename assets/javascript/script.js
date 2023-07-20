@@ -3,7 +3,7 @@ var specialChar = ["!", "@", "#", "$", "%", "&", "*", "_", "-", "?"];
 var lowerCaseChar = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 var upperCaseChar = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 var allChar = [];
-
+var returnValue;
 
 function generatePassword() {
   var userChoice = window.prompt("Enter password length within the range of 8-128 characters");
@@ -15,9 +15,11 @@ function generatePassword() {
     generatePassword();
     return;
   } else {
-    charOptions()
-  }
-}
+    charOptions();
+    returnValue = randomize(userChoiceNum);
+    window.alert("Password generated")
+  } return returnValue;
+}  
 
   function charOptions () {
     allChar = [];
@@ -42,12 +44,13 @@ function generatePassword() {
   }
 
 
-  function randomize () { 
-  // randomly select values from the allChar array
+  function randomize (userChoiceNum) { 
+    var returnValue = ""
   for (var i = 0; i < userChoiceNum; i++) {
-    allChar = Math.floor((Math.random() * userChoiceNum));
-  }   return password;
+    returnValue += allChar[Math.floor((Math.random() * allChar.length))]
+  }  return returnValue;
 }
+
 
 
 
