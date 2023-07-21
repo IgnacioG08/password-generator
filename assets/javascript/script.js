@@ -9,34 +9,45 @@ var returnValue;
 /*function generatePassword will create our first prompt gathering the users choice in characters and return the value of those choices
 in a randomized order*/
 function generatePassword() {
+  var retval = ""
   var userChoice = window.prompt("Enter password length within the range of 8-128 characters");
   var userChoiceNum = parseInt(userChoice, 10);
   if (isNaN(userChoiceNum) || userChoiceNum < 8 || userChoiceNum > 128) {
-    window.alert("Invalid password length. Please try again.");
-    generatePassword();
-    return;
+    window.alert("Invalid password length. Please try again."); 
   } else {
-    charOptions();
-    returnValue = randomize(userChoiceNum);
+    if (charOptions()) {
+     retval = randomize(userChoiceNum);
     window.alert("Password generated")
-  } return returnValue;
+    }
+  } 
+  return retval;
 }
+
 
 /* function charOptions will gather the types of characters that the user will be using in their password and storing them inside an array */
 function charOptions() {
+  var retval = false;
   allChar = [];
   if (window.confirm("Would you like to include uppercase letters?")) {
     allChar = allChar.concat(upperCaseChar);
+    retval = true;
   }
   if (window.confirm("Would you like to include lowercase letters?")) {
-    allChar = allChar.concat(lowerCaseChar)
+    allChar = allChar.concat(lowerCaseChar);
+    retval = true;
   }
   if (window.confirm("Would you like to include numbers?")) {
-    allChar = allChar.concat(numericalChar)
+    allChar = allChar.concat(numericalChar);
+    retval = true;
   }
   if (window.confirm("Would you like to include special characters?")) {
-    allChar = allChar.concat(specialChar)
+    allChar = allChar.concat(specialChar);
+    retval = true;
+  } 
+  if(allChar.length === 0) {
+    window.alert("Must select at least one character.")
   }
+  return retval;
 }
 
 /* function randomize will be responsible for looping and randomizing all the choices in the function prior to it */
